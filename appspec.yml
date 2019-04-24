@@ -1,0 +1,15 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /var/tmp/pyhttp
+hooks:
+  BeforeInstall:
+    - location: pyscripts/installSoft.sh
+    - location: pyscripts/stopPyServer.sh
+      timeout: 60
+      runas: root
+  AfterInstall:
+    - location: pyscripts/kickoffserver.sh
+      timeout: 60
+      runas: root
